@@ -171,9 +171,19 @@ Error message and password prompt
 
 <li>aggregate GPS points in same raster cell</li>
 
+<li>error while installing from github API rate limit</li>
+
+<li>importing with read_xlsx NAs</li>
+
 <li>levels of variables</li>
 
+<li>median calculation</li>
+
 <li>results item</li>
+
+<li>Sampling tool</li>
+
+<li>xlsform questionaire to human readable questionnaire</li>
 
 <li>xml to labels</li>
 
@@ -9585,7 +9595,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" title="$:/StoryList">
+<div list="[[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9646,7 +9656,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200907140528930" modified="20200921075241313" title="$:/temp/NewTagName">
+<div created="20200907140528930" modified="20201012055955710" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20200907140542690" modified="20200921075434843" title="$:/temp/search">
@@ -9787,6 +9797,42 @@ pt_sf2&lt;-pt_sf1[index_closest,]
 st_distance(pt_sf1,pt_sf2,by_element = T)
 </pre>
 </div>
+<div created="20201012055909240" modified="20201012060221102" tags="github" title="error while installing from github API rate limit">
+<pre>I don't know what is the API rate limit, I know I need to increment it but... how? I don't understand the last part
+
+&gt; devtools::install_github(&quot;impact-initiatives/hypegrammaR&quot;, build_opts = c())
+Error: Failed to install 'unknown package' from GitHub:
+  HTTP error 403.
+  API rate limit exceeded for 88.82.195.27. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)
+
+  Rate limit remaining: 0/60
+  Rate limit reset at: 2020-09-30 16:17:30 UTC
+
+  To increase your GitHub API rate limit
+  - Use `usethis::browse_github_pat()` to create a Personal Access Token.
+  - Use `usethis::edit_r_environ()` and add the token as `GITHUB_PAT`.
+
+–—— answer –——
+
+Create an account on GitHub if you don't have an account then create a personal access token. Creating a personal access token - GitHub Docs https://docs.github.com
+Then assign that token to an environment variable that you should name GITHUB_PAT. 
+Run this function to open .Renviron and create the env var inside that file 
+That should solve your problem! 
+
+–—— answer 2–——
+
+remotes::install_github(&quot;impact-initiatives/hypegrammaR&quot;)
+
+</pre>
+</div>
+<div created="20201012055711090" modified="20201012055821792" tags="read_xlsx NA" title="importing with read_xlsx NAs">
+<pre>Hey everyone, when I import a dataset like this - daily_data &lt;- read_xlsx(&quot;input/raw_data/raw_data_0924.xlsx&quot;) - it just puts NAs for most of my income variable. The first couple thousand rows are blank, so I think the function then assumes that the whole variable is NAs. I changed the default na = &quot;&quot;, but it didnt have any effect. When I import it as csv, all Arabic text would be rubbish, so that's not an option
+
+–—— answer –——
+
+you could set the guess_max argument in read_xlsx
+</pre>
+</div>
 <div created="20200915045940250" modified="20200915050317399" tags="r levels" title="levels of variables">
 <pre>Hi all, I need to use levels within a function. Something like fun &lt;- function(x) { levels(data$x) }. Seems like there must be a simple way to do this. . .
 
@@ -9794,6 +9840,17 @@ st_distance(pt_sf1,pt_sf2,by_element = T)
 
 levels(as.factor(data[,x]))
 
+
+</pre>
+</div>
+<div created="20201012060657360" modified="20201012061258056" tags="hypegrammaR" title="median calculation">
+<pre>So, there is no way to calculated the (weighted) medians of numeric vars inside the function? What would be the alternative? An external function such as weighted.median()?
+
+–—— answer –——
+
+you can use the package srvyr (srvyr::survey_median)
+
+I added weighted sum and weighted median to my forked HypegrammaR (but this was last year and I forked it from Martin repo, not sure it has all the updates that Data unit made) // https://github.com/hedibmustapha/hypegrammaR
 
 </pre>
 </div>
@@ -9809,6 +9866,26 @@ final_result&lt;- result$results %&gt;%
   lapply(function(x){x$summary.statistic}) %&gt;% do.call(rbind, .)
 
 
+
+
+
+</pre>
+</div>
+<div created="20201012060313073" modified="20201012060407007" tags="" title="Sampling tool">
+<pre>Hey everyone, anyone else having issues with the sampling tool? have a team member who says they keep getting disconnected from the server in the process... It's the Shiny app (https://impact-initiatives.shinyapps.io/r_sampling_tool_v2/) -- he's tried different networks and computers. Do we have any other recommended tool for this or can someone help troubleshoot?
+
+–—— answer –——
+
+Did you tick the type of separator for the csv before uploading the file?</pre>
+</div>
+<div created="20201012060420936" modified="20201012060826895" tags="kobo" title="xlsform questionaire to human readable questionnaire">
+<pre>Was there a package mentioned before that turned xlsform into a web printable questionnaire? I tend to recall it being mentioned but not the name...
+
+QuestionnaireHTML (: you can dl from Hedi's github
+
+–—— answer –——
+
+https://github.com/hedibmustapha/QuestionnaireHTML
 
 
 
