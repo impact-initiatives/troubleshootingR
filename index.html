@@ -145,6 +145,8 @@ Error message and password prompt
 
 <li>$:/DefaultTiddlers</li>
 
+<li>$:/Import</li>
+
 <li>$:/isEncrypted</li>
 
 <li>$:/SiteSubtitle</li>
@@ -171,17 +173,33 @@ Error message and password prompt
 
 <li>aggregate GPS points in same raster cell</li>
 
+<li>cannot install package</li>
+
+<li>data has 0</li>
+
 <li>error while installing from github API rate limit</li>
 
 <li>importing with read_xlsx NAs</li>
 
 <li>levels of variables</li>
 
+<li>mapping questions and choices dataset</li>
+
 <li>median calculation</li>
+
+<li>own weights</li>
+
+<li>reactive click</li>
 
 <li>results item</li>
 
 <li>Sampling tool</li>
+
+<li>Survey context not set</li>
+
+<li>survey.prob.weights</li>
+
+<li>weighted sum</li>
 
 <li>xlsform questionaire to human readable questionnaire</li>
 
@@ -9577,6 +9595,16 @@ Error message and password prompt
 <div created="20200915045515319" modified="20200915045515319" title="$:/DefaultTiddlers">
 <pre>[list[$:/StoryList]]</pre>
 </div>
+<div plugin-type="import" status="pending" title="$:/Import" type="application/json">
+<pre>{
+    &quot;tiddlers&quot;: {
+        &quot;Untitled&quot;: {
+            &quot;title&quot;: &quot;Untitled&quot;,
+            &quot;text&quot;: &quot;New Tiddler&quot;
+        }
+    }
+}</pre>
+</div>
 <div title="$:/isEncrypted">
 <pre>no</pre>
 </div>
@@ -9586,7 +9614,7 @@ Error message and password prompt
 <div created="20200907140425656" modified="20200907140430536" title="$:/SiteTitle">
 <pre>IMPACT R troubleshooting</pre>
 </div>
-<div created="20200915045716798" modified="20200915045743039" title="$:/state/image-picker/system--1365487189">
+<div created="20200915045716798" modified="20201110145724159" title="$:/state/image-picker/system--1365487189">
 <pre>hide</pre>
 </div>
 <div created="20200915045523702" modified="20200915045605654" title="$:/state/tab/sidebar--595412856">
@@ -9595,7 +9623,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" title="$:/StoryList">
+<div list="[[cannot install package]] [[own weights]] [[data has 0]] [[weighted sum]] [[reactive click]] [[Survey context not set]] [[mapping questions and choices dataset]] survey.prob.weights [[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9643,11 +9671,11 @@ Error message and password prompt
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
-            &quot;text&quot;: &quot;1920&quot;
+            &quot;text&quot;: &quot;1536&quot;
         },
         &quot;$:/info/browser/screen/height&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/height&quot;,
-            &quot;text&quot;: &quot;1080&quot;
+            &quot;text&quot;: &quot;864&quot;
         },
         &quot;$:/info/browser/language&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/language&quot;,
@@ -9656,7 +9684,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200907140528930" modified="20201012055955710" title="$:/temp/NewTagName">
+<div created="20200907140528930" modified="20201110145853424" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20200907140542690" modified="20200921075434843" title="$:/temp/search">
@@ -9771,7 +9799,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200915045607127" modified="20200915050325007" tags="r sf GIS GPS" title="aggregate GPS points in same raster cell">
+<div created="20200915045607127" modified="20201110145745936" tags="r sf GIS GPS" title="aggregate GPS points in same raster cell">
 <pre>Hi all quick question. Does anyone know how to aggregate GPS points that for instance fall within the same raster cell, but still retain the information (such as names) for each point? Here is an example picture, where most points have their own cell...but some cells may have more than one point. 
 [img[images/gps_points_raster.png]]
 
@@ -9796,6 +9824,35 @@ pt_sf2&lt;-pt_sf1[index_closest,]
 # get distance between closest points
 st_distance(pt_sf1,pt_sf2,by_element = T)
 </pre>
+</div>
+<div created="20201110145716425" modified="20201110145854512" tags="package installation" title="cannot install package">
+<pre>[img[images/backports.png]]
+
+–—— answer –——
+
+
+yeah I often find that I have to quit R, navigate to the &quot;Documents\R\win-library\4.0&quot; folder, delete the package from there, re-open R, install the package causing the issue, and then install the package i was originally interested in 
+
+
+
+</pre>
+</div>
+<div created="20201110145404098" modified="20201110145514760" tags="hypegrammaR" title="data has 0">
+<pre>running the analysis: 
+&gt; ### Create list of results district of displacement###
+&gt; list_of_results1 &lt;-  from_analysisplan_map_to_output(camp_profiling_gov, analysisplan = dap_campdistrict,
++                                                     weighting = weight.function,
++                                                     cluster_variable_name = NULL,
++                                                     questionnaire = questionnaire_gov, confidence_level = 0.90)
+Error in `$&lt;-.data.frame`(`*tmp*`, &quot;percentcomplete&quot;, value = c(&quot;Inf%\n\n&quot;,  : 
+  replacement has 2 rows, data has 0
+In addition: There were 37 warnings (use warnings() to see them)
+
+–—— answer –——
+
+
+it causes when you have dividing by 0
+Or check the analysis plan</pre>
 </div>
 <div created="20201012055909240" modified="20201012060221102" tags="github" title="error while installing from github API rate limit">
 <pre>I don't know what is the API rate limit, I know I need to increment it but... how? I don't understand the last part
@@ -9843,7 +9900,22 @@ levels(as.factor(data[,x]))
 
 </pre>
 </div>
-<div created="20201012060657360" modified="20201012061258056" tags="hypegrammaR" title="median calculation">
+<div created="20201110143949937" modified="20201110144530496" tags="labels kobo" title="mapping questions and choices dataset">
+<pre>did anyone ever tried to map the questions and choices from the kobo tool into the data set in R?
+
+I am at the moment trying to assemble a csv file with two columns (&quot;from&quot;: variable and value names in one column and &quot;to&quot;:  it's &quot;translations&quot; in the other).
+I ran into different issues trying to map the whole data frame. 
+
+–—— answer –——
+
+ try this script (the execution will take some time though)
+[ext[file|./files/recode.R]] 
+recode_df$label[l]
+if your column name in the choices tab is different than label change the line 17
+
+</pre>
+</div>
+<div created="20201012060657360" modified="20201110145101215" tags="hypegrammaR" title="median calculation">
 <pre>So, there is no way to calculated the (weighted) medians of numeric vars inside the function? What would be the alternative? An external function such as weighted.median()?
 
 –—— answer –——
@@ -9852,6 +9924,29 @@ you can use the package srvyr (srvyr::survey_median)
 
 I added weighted sum and weighted median to my forked HypegrammaR (but this was last year and I forked it from Martin repo, not sure it has all the updates that Data unit made) // https://github.com/hedibmustapha/hypegrammaR
 
+</pre>
+</div>
+<div created="20201110145527850" modified="20201110145554049" tags="hypegrammaR" title="own weights">
+<pre>Has anyone used before own calculated weights with hypegrammaR? 
+Is there a workaround to convert a normal column of weights into the weight-function (normally calculated from the sampling frame) the package wants to work with?
+
+–—— answer –——
+
+You could do something like:
+weight_fun&lt;-function(df){
+   df$weights
+ }</pre>
+</div>
+<div created="20201110144729745" modified="20201110145302497" tags="shinyapp leaflet" title="reactive click">
+<pre>I have been trying to implement reactive click feature for shiny app. So the outputs can be changed on selected shape in the map. The observeEvent() function is working for me and looking a way that I can link that to the outputs in the server section?
+
+–—— answer –——
+
+are you working with leaflet? try with observe() and inside with leafletProxy()
+
+
+–—— answer 2–——
+You can find an example here too: https://github.com/ElliottMess/RRM_Mali_Dashboard
 </pre>
 </div>
 <div created="20200921074927978" modified="20200921075301705" tags="r hypegrammaR" title="results item">
@@ -9878,6 +9973,61 @@ final_result&lt;- result$results %&gt;%
 
 Did you tick the type of separator for the csv before uploading the file?</pre>
 </div>
+<div created="20201110144405768" modified="20201110144636104" tags="hypegrammaR srvy" title="Survey context not set">
+<pre>has anyone seen this error before when calling from_analysisplan_map_to_output function?
+Error: Survey context not set
+Run `rlang::last_error()` to see where the error occurred.
+In addition: There were 50 or more warnings (use warnings() to see the first 50)
+&gt; rlang::last_error()
+&lt;error/rlang_error&gt;
+Survey context not set
+Backtrace:
+  1. base::source(&quot;2018/covid_analysis.R&quot;)
+  5. global::do_analysis(...) 2018/covid_analysis.R:28:0
+  6. hypegrammaR::from_analysisplan_map_to_output(...) 2018/functions/analysis.R:23:4
+  7. base::apply(...)
+  8. hypegrammaR:::FUN(newX[, i], ...)
+  9. hypegrammaR::map_to_result(...)
+ 10. hypegrammaR::map_to_summary_statistic(...)
+ 11. hypegrammaR::percent_with_confints_select_one_groups(...)
+ 12. plyr::summarise(...)
+ 13. [ base::eval(...) ] with 1 more call
+ 15. srvyr::survey_mean(vartype = &quot;ci&quot;, level = confidence_level)
+ 16. srvyr::current_svy()
+ 17. cur_svy_env$selected %||% rlang::abort(&quot;Survey context not set&quot;)
+
+–—— answer –——
+
+I usually fix that by unloading and reloading the srvy package
+
+
+
+</pre>
+</div>
+<div created="20201110143828370" modified="20201110144136553" tags="hypegrammaR weights" title="survey.prob.weights">
+<pre>Hey everyone, I keep getting error messages like this for my analysis: Error in `$&lt;-.data.frame`(`*tmp*`, &quot;.survey.prob.weights&quot;, value = c(1.52677597749772,  : 
+  replacement has 107 rows, data has 83
+
+–—— answer –——
+
+Both errors with from_analysisplan_map_to_output() were finally resolved after renaming a duplicate repeat var and running the function for each aggregate level separately.</pre>
+</div>
+<div created="20201110145231456" modified="20201110145441632" tags="hypegrammaR" title="weighted sum">
+<pre>Error in map_to_result(data = this_valid_data, dependent.var = x[&quot;dependent.var&quot;],  : 
+  value for argument 'case' is not a valid case string. It is best to create one using map_to_case(). If you make it by hand, it must be of the form CASE_[hypothesis_type]_[dependent.variable.type]_[independent.variable.type]
+for example 'CASE_group_difference_categorical_categorical'
+
+–—— answer –—— 
+
+designobject &lt;- svydesign(id=~uuid, strata=~strata3, weights=~my_weights, data=final)
+svytotal(~liquids_past_24_hours_0_59_months.no_liquids, designobject, na.rm=TRUE)
+x &lt;- svyby(~liquids_past_24_hours_0_59_months.no_liquids, ~strata1, designobject, svytotal, na.rm=T)
+x
+
+–—— answer2 –—— 
+you are trying to sum categorical instead of numerical values. I reckon this is why you have a problem. if the liquids_past24h.....no_liquids is a T/F, I think you should be fine to change the categorical to numerical in your dap 
+</pre>
+</div>
 <div created="20201012060420936" modified="20201012060826895" tags="kobo" title="xlsform questionaire to human readable questionnaire">
 <pre>Was there a package mentioned before that turned xlsform into a web printable questionnaire? I tend to recall it being mentioned but not the name...
 
@@ -9891,7 +10041,7 @@ https://github.com/hedibmustapha/QuestionnaireHTML
 
 </pre>
 </div>
-<div created="20200921075212593" modified="20200921075406361" tags="r xml labels kobo" title="xml to labels">
+<div created="20200921075212593" modified="20201110144240600" tags="r xml labels kobo" title="xml to labels">
 <pre> I have a clean dataset with xml_names that we are going to share with external partners, was wondering if we have a script to transform xml_names into labels.
 
 --—— answer --——
