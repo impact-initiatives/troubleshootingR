@@ -157,6 +157,8 @@ Error message and password prompt
 
 <li>$:/state/tab/sidebar--595412856</li>
 
+<li>$:/state/tag-manager/srvy</li>
+
 <li>$:/status/RequireReloadDueToPluginChange</li>
 
 <li>$:/StoryList</li>
@@ -175,6 +177,14 @@ Error message and password prompt
 
 <li>cannot install package</li>
 
+<li>cannot remove prior installation of package</li>
+
+<li>change to NA</li>
+
+<li>contrasts can be applied only to factors with 2 or more levels</li>
+
+<li>creating DAP</li>
+
 <li>data has 0</li>
 
 <li>error while installing from github API rate limit</li>
@@ -189,11 +199,17 @@ Error message and password prompt
 
 <li>own weights</li>
 
+<li>plot_set_percentages and index_intersections</li>
+
 <li>reactive click</li>
 
 <li>results item</li>
 
 <li>Sampling tool</li>
+
+<li>srvyr</li>
+
+<li>srvyr and NA results</li>
 
 <li>Survey context not set</li>
 
@@ -9617,13 +9633,16 @@ Error message and password prompt
 <div created="20200915045716798" modified="20201110145724159" title="$:/state/image-picker/system--1365487189">
 <pre>hide</pre>
 </div>
-<div created="20200915045523702" modified="20200915045605654" title="$:/state/tab/sidebar--595412856">
-<pre>$:/core/ui/SideBar/Open</pre>
+<div created="20200915045523702" modified="20201217082037235" title="$:/state/tab/sidebar--595412856">
+<pre>$:/core/ui/SideBar/More</pre>
+</div>
+<div created="20201217081934195" modified="20201217081942418" title="$:/state/tag-manager/srvy">
+<pre>closed</pre>
 </div>
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div list="[[cannot install package]] [[own weights]] [[data has 0]] [[weighted sum]] [[reactive click]] [[Survey context not set]] [[mapping questions and choices dataset]] survey.prob.weights [[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" title="$:/StoryList">
+<div created="20201217081853787" list="[[cannot remove prior installation of package]] [[plot_set_percentages and index_intersections]] [[srvyr and NA results]] [[creating DAP]] [[contrasts can be applied only to factors with 2 or more levels]] [[change to NA]] [[cannot install package]] [[own weights]] [[data has 0]] [[weighted sum]] [[reactive click]] [[Survey context not set]] [[mapping questions and choices dataset]] survey.prob.weights [[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" modified="20201217082022652" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9684,7 +9703,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200907140528930" modified="20201110145853424" title="$:/temp/NewTagName">
+<div created="20200907140528930" modified="20201217105548203" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20200907140542690" modified="20200921075434843" title="$:/temp/search">
@@ -9837,6 +9856,51 @@ yeah I often find that I have to quit R, navigate to the &quot;Documents\R\win-l
 
 </pre>
 </div>
+<div created="20201217105526596" modified="20201217105900996" tags="installation" title="cannot remove prior installation of package">
+<pre>Error: Failed to install 'Setviz' from GitHub:
+  (converted from warning) cannot remove prior installation of package ‘vctrs’
+Did this happen to anybody else? Manually delete and re-install?
+
+–—— answer –——
+
+
+Exactly manually delete and re-install
+Restart R session to be able to manually delete the package
+
+
+</pre>
+</div>
+<div created="20201217080919956" modified="20201217081331405" tags="NA" title="change to NA">
+<pre>did anyone use a vectorized version of replace_with_na(replace = list(var = c(&quot;NA&quot;)))?
+replace_with_na(replace = list(var_vector = c(&quot;NA&quot;))) doesnt work
+
+–—— answer –——
+
+ try dplyr:::na_if </pre>
+</div>
+<div created="20201217081205604" modified="20201217081356108" tags="butteR" title="contrasts can be applied only to factors with 2 or more levels">
+<pre>did anyone ever had this warning:
+
+ Error in `contrasts&lt;-`(`*tmp*`, value = contr.funs[1 + isOF[nn]]) : 
+  contrasts can be applied only to factors with 2 or more levels
+
+with butteR::mean_proportion_table ?
+
+–—— answer –——
+
+possibly within one of your groups there is only one level to the variable, no? Like all 1s or all 0s?
+this is usually the cause of that error. you can fix it by using forcats::fct_expand on the variable causing the problem
+there was an issue with that function causing some errors so i made butteR::mean_prop_working() which was supposed to replace it , but never got around to merging it... you can also try that!
+</pre>
+</div>
+<div created="20201217081450757" modified="20201217081721260" tags="dap hypegrammaR" title="creating DAP">
+<pre>Hello everyone! does anyone have the R script to create the DAP for hypegrammar? 
+
+This [ext[files|./files/creating_dap.rar]] 
+
+
+</pre>
+</div>
 <div created="20201110145404098" modified="20201110145514760" tags="hypegrammaR" title="data has 0">
 <pre>running the analysis: 
 &gt; ### Create list of results district of displacement###
@@ -9937,6 +10001,18 @@ weight_fun&lt;-function(df){
    df$weights
  }</pre>
 </div>
+<div created="20201217105305048" modified="20201217105359075" tags="Setviz [[prison graphs]]" title="plot_set_percentages and index_intersections">
+<pre>Hi eveRyone can anyone tell me the difference between the functions &quot;plot_set_percentages&quot; and &quot;index_intersections&quot; from the Setviz package. ?
+
+They both produce prison plots however produce very different results when plotting the index. 
+
+–—— answer –—— 
+
+plot_set_percentages is the generic function, the index_intesections is a wrapper around it and it calculates around the lsg specfically 
+
+
+</pre>
+</div>
 <div created="20201110144729745" modified="20201110145302497" tags="shinyapp leaflet" title="reactive click">
 <pre>I have been trying to implement reactive click feature for shiny app. So the outputs can be changed on selected shape in the map. The observeEvent() function is working for me and looking a way that I can link that to the outputs in the server section?
 
@@ -9973,7 +10049,22 @@ final_result&lt;- result$results %&gt;%
 
 Did you tick the type of separator for the csv before uploading the file?</pre>
 </div>
-<div created="20201110144405768" modified="20201110144636104" tags="hypegrammaR srvy" title="Survey context not set">
+<div created="20201217081955510" modified="20201217081956715" title="srvyr">
+<pre></pre>
+</div>
+<div created="20201217081743900" modified="20201217105404132" tags="butteR srvyr" title="srvyr and NA results">
+<pre>Its come to our attention that in the srvyr version 0.4.0 the na.rm=T argument is not sub-setting NA values the same way for categorical variables as it was in 0.3.8… Below are two examples running the same code with the two versions.  I am not sure if this is by design or a mistake, to me the functionality of na.rm in 0.3.8 is correct and in line with the current version of the survey package.
+
+–—— answer –——
+
+anyways, this does effect butteR::mean_proportion_table/butteR::mean_prop_working, so i suggest if you are using these functions you revert back to srvyr 0.3.8 if using it until this is resolved.
+you can revert back to 0.3.8 by running : &quot;devtools::install_version(&quot;srvyr&quot;, version = &quot;0.3.8&quot;, repos = &quot;http://cran.us.r-project.org&quot;)&quot; You will need to restart you R session after installing
+
+
+
+</pre>
+</div>
+<div created="20201110144405768" modified="20201217082050715" tags="hypegrammaR srvyr" title="Survey context not set">
 <pre>has anyone seen this error before when calling from_analysisplan_map_to_output function?
 Error: Survey context not set
 Run `rlang::last_error()` to see where the error occurred.
@@ -10041,7 +10132,7 @@ https://github.com/hedibmustapha/QuestionnaireHTML
 
 </pre>
 </div>
-<div created="20200921075212593" modified="20201110144240600" tags="r xml labels kobo" title="xml to labels">
+<div created="20200921075212593" modified="20201217081624868" tags="r xml labels kobo" title="xml to labels">
 <pre> I have a clean dataset with xml_names that we are going to share with external partners, was wondering if we have a script to transform xml_names into labels.
 
 --—— answer --——
