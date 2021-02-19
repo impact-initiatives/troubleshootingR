@@ -181,13 +181,19 @@ Error message and password prompt
 
 <li>change to NA</li>
 
+<li>common patterns in &quot;other&quot;</li>
+
 <li>contrasts can be applied only to factors with 2 or more levels</li>
 
 <li>creating DAP</li>
 
 <li>data has 0</li>
 
+<li>download data from kobo as XLS and set settings to &quot;XML values and headers&quot; group separator to &quot;.&quot;</li>
+
 <li>error while installing from github API rate limit</li>
+
+<li>illogical combinations of select mutiple and binary</li>
 
 <li>importing with read_xlsx NAs</li>
 
@@ -202,6 +208,8 @@ Error message and password prompt
 <li>plot_set_percentages and index_intersections</li>
 
 <li>reactive click</li>
+
+<li>Replacing .</li>
 
 <li>results item</li>
 
@@ -9642,7 +9650,7 @@ Error message and password prompt
 <div title="$:/status/RequireReloadDueToPluginChange">
 <pre>no</pre>
 </div>
-<div created="20201217081853787" list="[[cannot remove prior installation of package]] [[plot_set_percentages and index_intersections]] [[srvyr and NA results]] [[creating DAP]] [[contrasts can be applied only to factors with 2 or more levels]] [[change to NA]] [[cannot install package]] [[own weights]] [[data has 0]] [[weighted sum]] [[reactive click]] [[Survey context not set]] [[mapping questions and choices dataset]] survey.prob.weights [[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" modified="20201217082022652" title="$:/StoryList">
+<div list="[[illogical combinations of select mutiple and binary]] [[common patterns in &quot;other&quot;]] [[Replacing .]] [[download data from kobo as XLS and set settings to &quot;XML values and headers&quot; group separator to &quot;.&quot;]] [[cannot remove prior installation of package]] [[plot_set_percentages and index_intersections]] [[srvyr and NA results]] [[creating DAP]] [[contrasts can be applied only to factors with 2 or more levels]] [[change to NA]] [[cannot install package]] [[own weights]] [[data has 0]] [[weighted sum]] [[reactive click]] [[Survey context not set]] [[mapping questions and choices dataset]] survey.prob.weights [[median calculation]] [[xlsform questionaire to human readable questionnaire]] [[Sampling tool]] [[error while installing from github API rate limit]] [[importing with read_xlsx NAs]] [[xml to labels]] [[results item]] [[levels of variables]] [[aggregate GPS points in same raster cell]]" title="$:/StoryList">
 <pre></pre>
 </div>
 <div plugin-type="info" title="$:/temp/info-plugin" type="application/json">
@@ -9690,11 +9698,11 @@ Error message and password prompt
         },
         &quot;$:/info/browser/screen/width&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/width&quot;,
-            &quot;text&quot;: &quot;1536&quot;
+            &quot;text&quot;: &quot;1920&quot;
         },
         &quot;$:/info/browser/screen/height&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/screen/height&quot;,
-            &quot;text&quot;: &quot;864&quot;
+            &quot;text&quot;: &quot;1080&quot;
         },
         &quot;$:/info/browser/language&quot;: {
             &quot;title&quot;: &quot;$:/info/browser/language&quot;,
@@ -9703,7 +9711,7 @@ Error message and password prompt
     }
 }</pre>
 </div>
-<div created="20200907140528930" modified="20201217105548203" title="$:/temp/NewTagName">
+<div created="20200907140528930" modified="20210219135132688" title="$:/temp/NewTagName">
 <pre></pre>
 </div>
 <div created="20200907140542690" modified="20200921075434843" title="$:/temp/search">
@@ -9878,6 +9886,14 @@ replace_with_na(replace = list(var_vector = c(&quot;NA&quot;))) doesnt work
 
  try dplyr:::na_if </pre>
 </div>
+<div created="20210219135049713" modified="20210219135332305" tags="cleaning other" title="common patterns in &quot;other&quot;">
+<pre>Created these functions to identify common patterns in &quot;other&quot; text responses, in order to have a more systematic approach for adding new response categories during/after data collection. Might be useful for some people. Comments are in the script.
+
+This [ext[files|./files/functions_other.R]] 
+
+
+</pre>
+</div>
 <div created="20201217081205604" modified="20201217081356108" tags="butteR" title="contrasts can be applied only to factors with 2 or more levels">
 <pre>did anyone ever had this warning:
 
@@ -9918,6 +9934,57 @@ In addition: There were 37 warnings (use warnings() to see them)
 it causes when you have dividing by 0
 Or check the analysis plan</pre>
 </div>
+<div created="20210219134440805" modified="20210219134705336" tags="kobo" title="download data from kobo as XLS and set settings to &quot;XML values and headers&quot; group separator to &quot;.&quot;">
+<pre>anyone knows how to download data from kobo as XLS and set settings to &quot;XML values and headers&quot; group separator to &quot;.&quot;? I have just found this but somehow it doesnt work: https://github.com/ppsapkota/kobohrtoolbox/blob/master/README.md
+
+I mean it works with just downloading csv but not with setting &quot;XML values and headers&quot; and group separator to &quot;.&quot;
+
+–—— answer –——
+
+Yes! you can use the kobohr_create_export and pass in the &quot;.&quot; as the group_sep parameter 
+
+type &lt;- &quot;xls&quot;
+  lang &lt;- &quot;English&quot;
+  fields_from_all_versions &lt;- &quot;false&quot;
+  hierarchy_in_labels &lt;- &quot;false&quot;
+  group_sep = &quot;/&quot;
+  d_exports&lt;-kobohr_create_export(type=type,
+                                  lang=lang,
+                                  fields_from_all_versions=fields_from_all_versions,
+                                  hierarchy_in_labels=hierarchy_in_labels,
+                                  group_sep=group_sep,
+                                  asset_uid=asset_uid,
+                                  kobo_user,
+                                  kobo_pw)
+  d_exports&lt;-as.data.frame(d_exports)
+  
+  result&lt;-httr::GET (url=paste0(as.character(d_exports$url),&quot;?format=json&quot;),
+                     authenticate(kobo_user,kobo_pw),
+                     progress() )
+
+  
+  
+  result_file&lt;-httr::GET (url=jsonlite::fromJSON(rawToChar(result$content))$result,
+                          authenticate(kobo_user,kobo_pw),
+                          write_disk(tf &lt;- tempfile(fileext = &quot;.xlsx&quot;)),
+                          progress()
+  )
+  
+  df &lt;- import(tf)
+
+
+just set the asset_uid, kobo_user and kobo_pw variables 
+asset_uid is the unique id of your tool 
+if you don't know it use the kobohr_getforms_csv function to get it. 
+kobohr_getforms_csv (&quot;https://kc.humanitarianresponse.info/api/v1/data.csv&quot;,kobo_user, kobo_pw)
+
+
+
+
+
+
+</pre>
+</div>
 <div created="20201012055909240" modified="20201012060221102" tags="github" title="error while installing from github API rate limit">
 <pre>I don't know what is the API rate limit, I know I need to increment it but... how? I don't understand the last part
 
@@ -9943,6 +10010,15 @@ That should solve your problem!
 –—— answer 2–——
 
 remotes::install_github(&quot;impact-initiatives/hypegrammaR&quot;)
+
+</pre>
+</div>
+<div created="20210219135244825" modified="20210219135348186" tags="select_mutiple cleaning" title="illogical combinations of select mutiple and binary">
+<pre>And here two functions to identify illogical combinations of select-multiple character and binary vars
+
+This [ext[files|./files/functions_missing_select_multiple.R]] 
+
+
 
 </pre>
 </div>
@@ -9990,7 +10066,7 @@ I added weighted sum and weighted median to my forked HypegrammaR (but this was 
 
 </pre>
 </div>
-<div created="20201110145527850" modified="20201110145554049" tags="hypegrammaR" title="own weights">
+<div created="20201110145527850" modified="20210219131536366" tags="hypegrammaR weights" title="own weights">
 <pre>Has anyone used before own calculated weights with hypegrammaR? 
 Is there a workaround to convert a normal column of weights into the weight-function (normally calculated from the sampling frame) the package wants to work with?
 
@@ -10023,6 +10099,14 @@ are you working with leaflet? try with observe() and inside with leafletProxy()
 
 –—— answer 2–——
 You can find an example here too: https://github.com/ElliottMess/RRM_Mali_Dashboard
+</pre>
+</div>
+<div created="20210219134847960" modified="20210219134951359" tags="regex stringr" title="Replacing .">
+<pre>Hey all, I am having a weird problem. stringr::str_replace_all is replacing everything instead of the pattern. Maybe it's a simple issue and I am missing something. Did anyone here face the same issue?
+
+in R, &quot;.&quot; is a regular expression that matches any character. so your function is looking for any character and replacing it with &quot;_&quot;
+
+you need to escape it using &quot;\\.&quot;
 </pre>
 </div>
 <div created="20200921074927978" modified="20200921075301705" tags="r hypegrammaR" title="results item">
